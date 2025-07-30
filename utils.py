@@ -2,6 +2,8 @@ import torch
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
+import matplotlib.pyplot as plt
+
 
 class GrayscaleColorDataset(torch.utils.data.Dataset):
     def __init__(self, train=True):
@@ -53,3 +55,34 @@ def get_dataloader(batch_size=32):
     )
 
     return train_loader, val_loader
+
+
+
+def imshow(gray_image, color_image):
+    """
+        Displays a grayscale and corresponding color image side by side using matplotlib.
+
+        Args:
+            gray_image (torch.Tensor): A tensor representing the grayscale image with shape [1, H, W].
+            color_image (torch.Tensor): A tensor representing the color image with shape [3, H, W].
+
+        The function squeezes and permutes the tensors as needed, converts them to NumPy arrays,
+        and shows them using matplotlib with appropriate titles and layout.
+    """
+
+    gray_image_np = gray_image.squeeze().numpy()
+    color_image_np = color_image.permute(1, 2, 0).numpy()
+    color_image_np = (color_image_np + 1) / 2  # <- This rescales to [0, 1]
+
+    plt.subplot(1, 2, 1)
+    plt.title("Grayscale")
+    plt.imshow(gray_image_np, cmap='gray')
+    plt.axis('off')
+
+    plt.subplot(1, 2, 2)
+    plt.title("Color")
+    plt.imshow(color_image_np)
+    plt.axis('off')
+
+    plt.tight_layout()
+    plt.show()
