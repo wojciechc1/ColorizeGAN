@@ -1,17 +1,19 @@
-from utils import GrayscaleColorDataset
-from torch.utils.data import DataLoader
+from utils import get_dataloader
+import torch
 
-# Użycie:
+# hyperparameters
 batch_size = 64
+num_epochs = 1
 
-train_loader = DataLoader(
-    GrayscaleColorDataset(train=True),
-    batch_size=batch_size,
-    shuffle=True
-)
+# set device
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+torch.set_default_device(device)
 
-val_loader = DataLoader(
-    GrayscaleColorDataset(train=False),
-    batch_size=batch_size,
-    shuffle=False
-)
+# load data:
+train_loader, val_loader = get_dataloader(batch_size=batch_size)
+
+
+
+for epoch in range(num_epochs):
+    for img in train_loader:
+        print(img)
