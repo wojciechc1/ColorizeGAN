@@ -79,7 +79,7 @@ class Discriminator(nn.Module):
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Conv2d(512, 1, 4, 1, 1)  # output: logity
+            nn.Conv2d(512, 1, 4, 1, 1)
         )
 
     def forward(self, gray_img, color_img):

@@ -6,14 +6,21 @@ from train import train
 # hyperparameters
 batch_size = 32
 num_epochs = 100
-max_samples = 100
+
+train_samples = 50_000 # max 60_000
+val_samples = 10_000 # max 10_000
+
+
 
 # set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.set_default_device(device)
 
 # load data:
-train_loader, val_loader = get_dataloader(batch_size=batch_size, max_samples=max_samples)
+train_loader, val_loader = get_dataloader(
+    batch_size=batch_size, train_samples=train_samples, val_samples=val_samples
+)
+
 print(len(train_loader))
 
 # models

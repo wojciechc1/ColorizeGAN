@@ -29,7 +29,7 @@ class GrayscaleColorDataset(torch.utils.data.Dataset):
         return gray_img, color_img
 
 
-def get_dataloader(batch_size=32, max_samples=1000):
+def get_dataloader(batch_size=32, train_samples=1000, val_samples=100):
     """
     Returns DataLoaders for the CIFAR-10 dataset with paired grayscale and color images.
 
@@ -38,7 +38,8 @@ def get_dataloader(batch_size=32, max_samples=1000):
 
     Args:
         batch_size (int): Number of samples per batch. Default is 32.
-        max_samples (int): Maximum number of samples to load for both training and validation.
+        train_samples (int): Maximum number of samples to load for test.
+        val_samples (int): Maximum number of samples to load for validation.
 
     Returns:
         Tuple[DataLoader, DataLoader]:
@@ -48,8 +49,8 @@ def get_dataloader(batch_size=32, max_samples=1000):
     full_train_dataset = GrayscaleColorDataset(train=True)
     full_val_dataset = GrayscaleColorDataset(train=False)
 
-    train_indices = random.sample(range(len(full_train_dataset)), max_samples)
-    val_indices = random.sample(range(len(full_val_dataset)), max_samples)
+    train_indices = random.sample(range(len(full_train_dataset)), train_samples)
+    val_indices = random.sample(range(len(full_val_dataset)), val_samples)
 
     train_subset = Subset(full_train_dataset, train_indices)
     val_subset = Subset(full_val_dataset, val_indices)
