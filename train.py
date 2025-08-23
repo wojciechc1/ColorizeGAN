@@ -1,4 +1,5 @@
 import torch
+import torch.nn.utils as nn_utils
 
 def train(train_loader, g, d, criterion_l1, criterion_bce, d_opt, g_opt, device):
     total_loss_d = 0
@@ -19,7 +20,7 @@ def train(train_loader, g, d, criterion_l1, criterion_bce, d_opt, g_opt, device)
         fake_preds = d(gray_images, fake_color_images.detach())
 
         # d loss
-        real_labels = torch.ones_like(real_preds, device=device)
+        real_labels = torch.full_like(real_preds, 0.9, device=device)
         fake_labels = torch.zeros_like(fake_preds, device=device)
 
         d_loss_real = criterion_bce(real_preds, real_labels)
@@ -47,6 +48,7 @@ def train(train_loader, g, d, criterion_l1, criterion_bce, d_opt, g_opt, device)
         # backward dla G
         g_opt.zero_grad()
         g_loss.backward()
+        #nn_utils.clip_grad_norm_(g.parameters(), max_norm=1.0)
         g_opt.step()
 
         # zbieranie statystyk

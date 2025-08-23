@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
+
 class UNet(nn.Module):
     def __init__(self):
         super().__init__()
@@ -61,25 +62,24 @@ class UNet(nn.Module):
 
 
 class Discriminator(nn.Module):
-    def __init__(self, dropout_prob=0.1):
+    def __init__(self, dropout_prob=0.05):
         super().__init__()
         self.model = nn.Sequential(
-            nn.Conv2d(4, 64, 4, 2, 1),
+            nn.utils.spectral_norm(nn.Conv2d(4, 64, 4, 2, 1)),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Conv2d(64, 128, 4, 2, 1),
+            nn.utils.spectral_norm(nn.Conv2d(64, 128, 4, 2, 1)),
             nn.BatchNorm2d(128),
             nn.LeakyReLU(0.2, inplace=True),
 
-            nn.Conv2d(128, 256, 4, 2, 1),
+            nn.utils.spectral_norm(nn.Conv2d(128, 256, 4, 2, 1)),
             nn.BatchNorm2d(256),
             nn.LeakyReLU(0.2, inplace=True),
-            #nn.Dropout2d(dropout_prob),  # <-- Dropout dodany
+            nn.Dropout2d(dropout_prob),
 
-            nn.Conv2d(256, 512, 4, 1, 1),
+            nn.utils.spectral_norm(nn.Conv2d(256, 512, 4, 1, 1)),
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
-            #nn.Dropout2d(dropout_prob),  # <-- Dropout dodany
 
             nn.Conv2d(512, 1, 4, 1, 1)
         )
