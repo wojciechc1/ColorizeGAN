@@ -7,6 +7,19 @@ import torchvision.transforms.functional as TF
 from model import UNet
 import os
 
+from PIL import Image
+
+MAX_SIZE = 512
+
+def preprocess_image(img_pil: Image.Image) -> Image.Image:
+    w, h = img_pil.size
+    if max(w, h) > MAX_SIZE:
+        # wyznacz skale
+        scale = MAX_SIZE / max(w, h)
+        new_w, new_h = int(w * scale), int(h * scale)
+        img_pil = img_pil.resize((new_w, new_h), Image.Resampling.LANCZOS)
+    return img_pil
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MODEL_PATH = "saved/generator1.pth"
 
@@ -44,8 +57,9 @@ st.title("Grayscale -> Colorizer")
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 if uploaded_file:
     try:
-        img = Image.open(uploaded_file)
-        st.image(img, caption="Original Image", use_container_width=True)
+        img = Image.open(uploaded_file).convert("RGB")
+        img = preprocess_image(img)
+        st.image(img, caption="Original (resized)", use_container_width=True)
     except Exception as e:
         st.error(f"Cannot open image: {e}")
         img = None
