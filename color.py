@@ -8,8 +8,8 @@ from model import UNet
 # settings
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model_path = "saved/generator1.pth"
-input_image_path = "input4.jpeg"
-output_image_path = "output4.png"
+input_image_path = "imgs/output1.png"
+output_image_path = "output8.png"
 
 # model
 g = UNet().to(device)
