@@ -53,6 +53,9 @@ def colorize_image(img_pil: Image.Image) -> np.ndarray:
 
 # --- Streamlit UI ---
 st.title("Grayscale -> Colorizer")
+st.info("ℹ️ Due to Streamlit cloud resource limits, it is recommended to use images smaller than 800px. "
+        "Larger files are automatically resized, which may affect performance.")
+
 
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 if uploaded_file:
