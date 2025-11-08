@@ -33,14 +33,14 @@ Limited computational resources:
 ### version 1:
 | 1                                  | 2                                   |
 |------------------------------------|-------------------------------------|
-| ![example_image](imgs/example.png) | ![example_image](imgs/example2.png) |
+| ![example_image](docs/example.png) | ![example_image](docs/example2.png) |
 
 
 ### version 2:
 | 1238x750px                           | 640x423px                           | 500x333px                            | 500x750px                            |
 |--------------------------------------|-------------------------------------|--------------------------------------|--------------------------------------|
-| ![black_and_white](imgs/input1.jpeg) | ![black_and_white](imgs/input2.jpg) | ![black_and_white](imgs/input3.jpeg) | ![black_and_white](imgs/input4.jpeg) |
-| ![colored_img](imgs/output1.png)     | ![colored_img](imgs/output2.png)    | ![colored_img](imgs/output3.png)     | ![colored_img](imgs/output4.png)     |
+| ![black_and_white](docs/input1.jpeg) | ![black_and_white](docs/input2.jpg) | ![black_and_white](docs/input3.jpeg) | ![black_and_white](docs/input4.jpeg) |
+| ![colored_img](docs/output1.png)     | ![colored_img](docs/output2.png)    | ![colored_img](docs/output3.png)     | ![colored_img](docs/output4.png)     |
 
 ## Limitations
 - Trained on low-res (128×128) images -> show color patches on bigger images.
