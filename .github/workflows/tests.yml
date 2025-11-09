@@ -36,7 +36,7 @@ jobs:
         run: black --check src tests
 
       - name: Run Ruff linter
-        run: ruff check src tests.py
+        run: ruff check src tests
 
       - name: Run MyPy type checker
         run: mypy src --ignore-missing-imports --explicit-package-bases || true
