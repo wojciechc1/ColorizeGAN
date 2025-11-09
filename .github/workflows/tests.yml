@@ -33,7 +33,7 @@ jobs:
           pip install pytest ruff mypy black
 
       - name: Check formatting with Black
-        run: black --check src tests.py
+        run: black --check src tests
 
       - name: Run Ruff linter
         run: ruff check src tests.py
