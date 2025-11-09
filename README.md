@@ -1,4 +1,8 @@
-# GAN-based Image Colorization
+# MoreColors
+[![CI](https://github.com/wojciechc1/MoreColors/actions/workflows/tests.yml/badge.svg)](https://github.com/wojciechc1/MoreColors/actions)[![Code style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Linter: Ruff](https://img.shields.io/badge/linter-ruff-cc66ff.svg)](https://github.com/astral-sh/ruff)
+[![Mypy](https://img.shields.io/badge/mypy-checked-blue.svg)](https://github.com/python/mypy)
+
 ### Live Demo : https://more-colors.streamlit.app/
 
 This is a deep learning project for automatic colorization of grayscale images using GANs (Generative Adversarial Networks). The goal was to take a black-and-white image and predict a realistic colored version.

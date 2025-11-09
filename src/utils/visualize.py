@@ -1,7 +1,8 @@
 from typing import List
 from torch import Tensor
 import matplotlib.pyplot as plt
-
+from PIL import Image
+import numpy as np
 
 def imshow(real_img: Tensor, gray_img: Tensor, fake_img: Tensor) -> None:
     """Displays real, grayscale, and generated color images side by side."""
@@ -33,3 +34,9 @@ def plot_losses(all_d_losses: List[float], all_g_losses: List[float]) -> None:
     plt.grid(True)
     plt.tight_layout()
     plt.show()
+
+
+def save_colorized_image(img_array: np.ndarray, output_path: str) -> None:
+    """Save colorized NumPy image ([0,1]) as PNG/JPG file."""
+    img_uint8 = (img_array * 255).clip(0, 255).astype(np.uint8)
+    Image.fromarray(img_uint8).save(output_path)
