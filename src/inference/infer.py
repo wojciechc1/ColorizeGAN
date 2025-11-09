@@ -22,4 +22,4 @@ if __name__ == "__main__":
     main()
 
 
-#TODO add CI / update README / update GUI
+# TODO add CI / update README / update GUI

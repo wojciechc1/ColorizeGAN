@@ -20,7 +20,7 @@ CONFIG = {
     "train_samples": 100,
     "val_samples": 100,
     # Paths
-    "generator_path": PROJECT_ROOT / "checkpoints" / "generator1.pth",
+    "generator_path": PROJECT_ROOT / "checkpoints" / "generator2.pth",
     "discriminator_path": PROJECT_ROOT / "checkpoints" / "discriminator1.pth",
     "generator_save_path": PROJECT_ROOT / "checkpoints" / "generator_beta.pth",
     "discriminator_save_path": PROJECT_ROOT / "checkpoints" / "discriminator_beta.pth",

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 
+
 def imshow(real_img: Tensor, gray_img: Tensor, fake_img: Tensor) -> None:
     """Displays real, grayscale, and generated color images side by side."""
     gray_np = gray_img.squeeze().cpu().numpy()
