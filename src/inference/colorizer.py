@@ -40,9 +40,17 @@ class Colorizer:
         model.eval()
         return model
 
-    def _preprocess(self, image_path: str) -> Tensor:
-        """Load and prepare image for inference."""
-        img: Image.Image = Image.open(image_path).convert("RGB")
+    def _preprocess(self, image: Union[str, Image.Image]) -> Tensor:
+        """Load and prepare image for inference. Accepts path or PIL Image."""
+        if isinstance(image, str):
+            if not os.path.exists(image):
+                raise FileNotFoundError(f"Image not found: {image}")
+            img = Image.open(image).convert("RGB")
+        elif isinstance(image, Image.Image):
+            img = image.convert("RGB")
+        else:
+            raise TypeError("image must be a file path or PIL.Image.Image")
+
         img_tensor: Tensor = (
             self.transform(img).unsqueeze(0).to(self.device)
         )  # [1,3,H,W]
@@ -60,12 +68,8 @@ class Colorizer:
         img_np: np.ndarray = tensor.permute(1, 2, 0).numpy()
         return img_np
 
-    def __call__(self, image_path: str) -> np.ndarray:
+    def __call__(self, image: Union[str, Image.Image]) -> np.ndarray:
         """Full colorization pipeline: preprocess > infer > postprocess."""
-        # image file not found
-        if not os.path.exists(image_path):
-            raise FileNotFoundError(f"Image not found: {image_path}")
-
-        gray: Tensor = self._preprocess(image_path)
+        gray: Tensor = self._preprocess(image)
         output: Tensor = self._inference(gray)
         return self._postprocess(output)

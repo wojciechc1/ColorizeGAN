@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Colorizer</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+        font-family: "Helvetica", "Arial", sans-serif;
+        padding: 40px;
+        background: #e0e1dd;
+    }
+    input[type="file"] {
+        margin: 20px 0;
+    }
+    img {
+        margin-top: 20px;
+        max-width: 300px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 10px 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+
+    <h1>Image Colorizer</h1>
+
+    <input type="file" id="fileInput" accept="image/*">
+    <button id="uploadBtn">Colorize</button>
+
+
+    <h2>Preview:</h2>
+    <img id="preview" src="" width="300" alt="Uploaded image will appear here">
+    <img id="resultImage" src="" alt="Colorized image will appear here">
+
+    <script>
+        const uploadBtn = document.getElementById("uploadBtn");
+        const fileInput = document.getElementById("fileInput");
+        const resultImage = document.getElementById("resultImage");
+
+        fileInput.addEventListener("change", () => {
+            const file = fileInput.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+            } else {
+                preview.src = "";
+            }
+        });
+
+        uploadBtn.addEventListener("click", async () => {
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please select an image first!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            try {
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!response.ok) throw new Error("Colorization failed");
+
+                const blob = await response.blob();
+                resultImage.src = URL.createObjectURL(blob);
+            } catch (err) {
+                alert(err.message);
+            }
+        });
+    </script>
+</body>
+</html>
