@@ -27,7 +27,7 @@ async def predict(file: UploadFile = File(...)):
     image_bytes = await file.read()
     img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     img = ImageOps.exif_transpose(img)
-    img.thumbnail((256, 256))
+    img.thumbnail((128, 128))
 
     img_array = colorizer(img)
 
