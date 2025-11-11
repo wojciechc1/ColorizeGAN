@@ -5,6 +5,7 @@ matplotlib~=3.10.3
 numpy~=2.2.6
 fastapi
 uvicorn[standard]
+python-multipart
 pytest
 ruff
 black
