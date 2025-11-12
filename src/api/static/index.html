@@ -17,6 +17,11 @@
             background: linear-gradient(136deg, rgba(152, 255, 192, 1) 0%, rgba(196, 205, 250, 1) 100%);
             padding: 3rem;
         }
+        .note{
+            font-size: 0.7rem;
+            color: #666;
+            font-style: italic;
+        }
         input[type="file"] {
             margin: 20px 0;
         }
@@ -54,6 +59,7 @@
             min-height: 250px;
             display: flex;
             justify-content: center;
+            margin: 1rem 0;
             align-items: center;
             gap: 10px;
         }
@@ -68,6 +74,7 @@
     <div class="panel">
         <h1>Image Colorizer</h1>
 
+
         <div class="container">
             <input type="file" id="fileInput" accept="image/*">
             <button id="uploadBtn">Colorize</button>
@@ -79,6 +86,9 @@
             <img id="preview" src="" alt="Uploaded image will appear here">
             <img id="resultImage" src="" alt="Colorized image will appear here">
         </div>
+        <p class="note">
+  Note: Image resolution reduced to 128×128 for demo due to free hosting limits.
+</p>
     </div>
 
 
