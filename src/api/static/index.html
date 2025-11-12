@@ -6,37 +6,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
-        font-family: "Helvetica", "Arial", sans-serif;
-        padding: 40px;
-        background: #e0e1dd;
-    }
-    input[type="file"] {
-        margin: 20px 0;
-    }
-    img {
-        margin-top: 20px;
-        max-width: 300px;
-        border: 1px solid #ccc;
-    }
-    button {
-        padding: 10px 20px;
-        font-weight: bold;
-        cursor: pointer;
-    }
+            font-family: "Helvetica", "Arial", sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(136deg, rgba(152, 255, 192, 1) 0%, rgba(196, 205, 250, 1) 100%);
+            padding: 3rem;
+        }
+        input[type="file"] {
+            margin: 20px 0;
+        }
+        img {
+            width: 180px; height: auto; max-height: 500px;
+            object-fit: contain;
+        }
+        button {
+            padding: 2px 5px;
+            font-weight: lighter;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .panel {
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            width: clamp(400px, 800px, 50vw);
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            border-radius: .8rem;
+            box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.3);
+            height: auto;
+        }
+
+        .preview_container{
+            min-height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1, h2{
+            font-weight: lighter;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Image Colorizer</h1>
+    <div class="panel">
+        <h1>Image Colorizer</h1>
 
-    <input type="file" id="fileInput" accept="image/*">
-    <button id="uploadBtn">Colorize</button>
+        <div class="container">
+            <input type="file" id="fileInput" accept="image/*">
+            <button id="uploadBtn">Colorize</button>
+        </div>
 
 
-    <h2>Preview:</h2>
-    <img id="preview" src="" width="300" alt="Uploaded image will appear here">
-    <img id="resultImage" src="" alt="Colorized image will appear here">
+        <p>Preview:</p>
+        <div class="preview_container">
+            <img id="preview" src="" alt="Uploaded image will appear here">
+            <img id="resultImage" src="" alt="Colorized image will appear here">
+        </div>
+    </div>
+
 
     <script>
         const uploadBtn = document.getElementById("uploadBtn");
