@@ -3,11 +3,18 @@
 [![Linter: Ruff](https://img.shields.io/badge/linter-ruff-cc66ff.svg)](https://github.com/astral-sh/ruff)
 [![Mypy](https://img.shields.io/badge/mypy-checked-blue.svg)](https://github.com/python/mypy)
 
-## Live Demo: https://morecolors.onrender.com/
-
 This is a deep learning project for automatic colorization of grayscale images using GANs (Generative Adversarial Networks). The goal was to take a black-and-white image and predict a realistic colored version.
-
 The project was designed and trained entirely in Google Colab using limited GPU resources (T4).
+
+## Demo & Deployment
+Live demo: [https://morecolors.onrender.com/](https://morecolors.onrender.com/)
+
+This demo is deployed on **Render** using **FastAPI** and integrated with **GitHub Actions** for automatic CI/CD.  
+Each commit to the `main` branch triggers a new build and redeployment.
+
+> **Note:**  
+> The demo runs on Render’s **free tier**, which provides only **512 MB RAM**, **CPU-only execution**, and introduces a **cold start delay** after inactivity.  
+> Because the colorization model (PyTorch + U-Net GAN) is relatively heavy, inference is limited to **low-resolution images (~128×128)** for stability, and the **colorization process can take several seconds** to complete.
 
 ## Features:
 - Generator: U-Net style architecture that takes a grayscale image and outputs a colored image.
@@ -16,7 +23,6 @@ The project was designed and trained entirely in Google Colab using limited GPU 
 - Training on small datasets: Optimized to learn from fewer images, but higher resolution (e.g., 128x128), instead of massive datasets like CIFAR-10.
 
 ## Challenges and Solutions:
-
 Color blobs / artifacts:
 - When training, generated images often had large, unrealistic color patches.
 - Experimented with different loss weights, normalization layers, and dropout in the discriminator to stabilize learning.
@@ -33,6 +39,11 @@ Limited computational resources:
 - Training on a T4 GPU in Colab with batch size 16.
 - Had to carefully optimize memory usage, reduce image size when needed, and use gradient clipping and efficient DataLoader settings (num_workers, pin_memory).
 
+## Limitations
+- Trained on low-res (128×128) images -> show color patches on bigger images.
+- Dataset was general-purpose -> may struggle with niche or unusual images.
+- GPU & resources: trained on T4 in Colab, so results depend on hardware.
+
 
 ### version 1:
 | 1                                  | 2                                   |
@@ -46,7 +57,3 @@ Limited computational resources:
 | ![black_and_white](docs/input1.jpeg) | ![black_and_white](docs/input2.jpg) | ![black_and_white](docs/input3.jpeg) | ![black_and_white](docs/input4.jpeg) |
 | ![colored_img](docs/output1.png)     | ![colored_img](docs/output2.png)    | ![colored_img](docs/output3.png)     | ![colored_img](docs/output4.png)     |
 
-## Limitations
-- Trained on low-res (128×128) images -> show color patches on bigger images.
-- Dataset was general-purpose -> may struggle with niche or unusual images.
-- GPU & resources: trained on T4 in Colab, so results depend on hardware.
